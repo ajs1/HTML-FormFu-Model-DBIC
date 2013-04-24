@@ -816,7 +816,7 @@ sub _fix_value {
 
     if ( defined $value ) {
         if ( ( (     $is_nullable
-                  && $data_type =~ m/^timestamp|date|int|float|numeric/i
+                  && $data_type =~ m/^timestamp|date|int|float|numeric|double/i
             ) or $field->model_config->{null_if_empty} )
 
             # comparing to '' does not work for inflated objects
