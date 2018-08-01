@@ -130,6 +130,19 @@ sub _get_resultset {
 
     if ( defined $schema ) {
         my $rs_name = $attrs->{resultset} || ucfirst $base->name;
+	if ($rs_name =~ /\./) {
+        	my ($rs_base,@rses) = split(/\./, $rs_name);
+
+        	my $rs = $schema->resultset($rs_base);
+
+        	foreach (@rses) {
+          		$rs = $rs->$_;
+        	}
+        	return $rs;
+       }
+      	else {
+        	return $schema->resultset($rs_name);
+       }
 
         return $schema->resultset($rs_name);
     }
